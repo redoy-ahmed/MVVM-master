@@ -1,0 +1,60 @@
+ext {
+
+  //Version
+  retrofitVersion = '2.7.0'
+  rxAndroidVersion = '2.1.1'
+  rxJavaVersion  = '2.2.9'
+
+  glideVersion = '4.11.0'
+  circleImageVersion = '3.1.0'
+
+  junitVersion = '4.12'
+  mockitoVersion = '2.8.47'
+
+  //Packages
+  retrofitPackage = 'com.squareup.retrofit2'
+
+  reactivePackage = 'io.reactivex.rxjava2'
+
+  glidePackage = 'com.github.bumptech.glide'
+  hdodenhofPackage = 'de.hdodenhof'
+
+  junitPackage = 'junit'
+  mockitoPackage = 'org.mockito'
+
+  multidexVersion = '1.0.2'
+  androidXVersion = '1.1.0'
+
+  androidXdependencies = [
+      material          : buildDependency('com.google.android.material', 'material', '1.1.0'),
+      recyclerView     : buildDependency('androidx.recyclerview', 'recyclerview', androidXVersion),
+      cardView         : buildDependency('androidx.cardview', 'cardview', '1.0.0'),
+      appCompat        : buildDependency('androidx.appcompat', 'appcompat', androidXVersion)
+  ]
+
+  retrofitDependencies = [
+      retrofit     : buildDependency(retrofitPackage, 'retrofit', retrofitVersion),
+      gson         : buildDependency(retrofitPackage, 'converter-gson', retrofitVersion),
+      rxAdapterJava: buildDependency(retrofitPackage, 'adapter-rxjava2', retrofitVersion)
+  ]
+
+  rxDependencies = [
+      rxAndroid: buildDependency(reactivePackage, 'rxandroid', rxAndroidVersion),
+      rxJava   : buildDependency(reactivePackage,'rxjava',rxJavaVersion)
+  ]
+
+  glide = buildDependency(glidePackage, 'glide', glideVersion)
+  glideCompiler = buildDependency(glidePackage, 'compiler', glideVersion)
+  circleImageView = buildDependency(hdodenhofPackage, 'circleimageview', circleImageVersion)
+
+  testingDependencies = [
+      junit      : buildDependency(junitPackage, 'junit', junitVersion),
+      mockito    : buildDependency(mockitoPackage, 'mockito-core', mockitoVersion)
+  ]
+
+  multidex = buildDependency('androidx.multidex', 'multidex', '2.0.0')
+}
+
+static String buildDependency(String pack, String dependency, String version) {
+  return "${pack}:${dependency}:${version}"
+}
