@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -48,20 +50,12 @@ public class LoginViewModel extends Observable {
             User user = repository.getUser(userName, password);
 
             if (user == null) {
-                Toast.makeText(context, "Invalid user name or password", Toast.LENGTH_LONG).show();
+                new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(context, "Invalid user name or password", Toast.LENGTH_LONG).show());
             } else {
                 sharedpreferences.edit().putBoolean(Util.USER_LOGIN_STATUS, true).apply();
                 openMainActivity();
             }
         });
-    }
-
-    public void decideNextActivity() {
-        boolean isUserLoggedIn = sharedpreferences.getBoolean(Util.USER_LOGIN_STATUS, false);
-
-        if (isUserLoggedIn) {
-            openMainActivity();
-        }
     }
 
     public void openMainActivity() {

@@ -1,11 +1,13 @@
 package com.mvvm.view;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import com.mvvm.PeopleApplication;
+import com.mvvm.Util;
 import com.mvvm.databinding.ActivityLoginBinding;
 
 import com.mvvm.R;
@@ -41,8 +43,13 @@ public class LoginActivity extends AppCompatActivity implements Observer {
     }
 
     private void decideNextActivity() {
-        loginViewModel.decideNextActivity();
-        finish();
+
+        boolean isUserLoggedIn = getApplicationContext().getSharedPreferences(Util.SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE).getBoolean(Util.USER_LOGIN_STATUS, false);
+
+        if (isUserLoggedIn) {
+            loginViewModel.openMainActivity();
+            finish();
+        }
     }
 
     @Override
